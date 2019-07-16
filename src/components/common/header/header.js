@@ -1,18 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch  } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import logo from './logo.svg';
 import './header.scss';
-import MainPage from "../../../containers/mainPage/mainPage";
-import AboutUs from "../../../containers/aboutUs/aboutUs";
 
-class Header extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-    }
+class Header extends React.PureComponent {
+    // Set default props
+    static defaultProps = {
+        counter: 0,
+    };
 
     render() {
         return (
@@ -23,19 +18,17 @@ class Header extends React.Component {
                             <img src={logo} alt="logo" />
                         </div>
                         <div className="title">Total: {this.props.counter}</div>
-                        <Router>
-                            <ul>
-                                <li>
-                                    <Link to="/">Home</Link>
-                                </li>
-                                <li>
-                                    <Link to="/about">About Us</Link>
-                                </li>
-                                <li>
-                                    <Link to="/contacts">Contacts</Link>
-                                </li>
-                            </ul>
-                        </Router>
+                        <ul>
+                            <li>
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li>
+                                <Link to="/about">About Us</Link>
+                            </li>
+                            <li>
+                                <Link to="/contacts">Contacts</Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

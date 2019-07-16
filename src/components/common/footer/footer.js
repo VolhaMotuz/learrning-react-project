@@ -1,15 +1,7 @@
 import React from 'react';
 import './footer.scss';
 
-class Footer extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        };
-    }
-
+class Footer extends React.PureComponent {
     render() {
         return (
             <div className="footer">

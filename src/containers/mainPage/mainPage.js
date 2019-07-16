@@ -1,11 +1,17 @@
-import React, {Fragment} from 'react';
-import { BASE_API_URL } from '../../globals';
-import axios from 'axios';
+import React from 'react';
 import Preloader from "../../components/common/preloader/preloader";
 import PostItem from "../../components/postItem/postItem";
+import { apiGetPosts } from './../../services/api/postsService';
 
+/**
+ *
+ */
 class MainPage extends React.Component {
 
+    /**
+     *
+     * @param props
+     */
     constructor(props) {
         super(props);
         this.state = {
@@ -16,9 +22,11 @@ class MainPage extends React.Component {
         };
     }
 
+    /**
+     *
+     */
     componentDidMount() {
-
-        axios.get(BASE_API_URL)
+        apiGetPosts()
             .then(response => {
                 //console.log(response.data);
                 this.setState({
@@ -34,32 +42,32 @@ class MainPage extends React.Component {
                     error
                 });
             });
-
     }
 
+    /**
+     *
+     * @returns {*}
+     */
     render() {
-        const { error, isLoaded, data, items } = this.state;
+        const { error, isLoaded, items } = this.state;
+
         if (error) {
-            return <div>Ошибка: {error.message}</div>;
+            return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
             return <Preloader />;
         } else {
             return (
-
                 <div className="row">
-
                     {items.map(item => (
-                        <Fragment key={item.source.id}>
                             <PostItem image={item.urlToImage}
                                       title={item.title}
                                       url={item.url}
                                       author={item.author}
-                                      date={item.publishedAt}/>
-                        </Fragment>
+                                      date={item.publishedAt}
+                                      key={item.title}
+                            />
                     ))}
-
                 </div>
-
             );
         }
     }
